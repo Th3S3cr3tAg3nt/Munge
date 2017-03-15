@@ -1,0 +1,9 @@
+apple
+boat
+cat
+dog
+egg
+fish
+goat
+hat
+igloo
