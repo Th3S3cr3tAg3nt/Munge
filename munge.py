@@ -5,11 +5,11 @@ __author__ = 'th3s3cr3tag3nt'
 parser = argparse.ArgumentParser(
 	formatter_class=argparse.RawDescriptionHelpFormatter,
      description='''\
- _ __ ___  _   _ _ __   __ _  ___   _ __  _   _ 
+ _ __ ___  _   _ _ __   __ _  ___   _ __  _   _
 | \'_ \' _ \| | | | \'_ \ / _\' |/ _ \ | \'_ \| | | |
 | | | | | | |_| | | | | (_| |  __/_| |_) | |_| |
 |_| |_| |_|\__,_|_| |_|\__, |\___(_) .__/ \__, |
-                       |___/       |_|    |___/ 
+                       |___/       |_|    |___/
 
 Dirty little word munger by Th3 S3cr3t Ag3nt.
 '''
@@ -158,7 +158,7 @@ def mungeword(wrd, level):
 
 if args.word:
 	wrd = args.word.lower()
-	mungeword(wrd. args.level)
+	mungeword(wrd, args.level)
 elif args.input:
 	## Open the file with read only permit
 	try:
