@@ -5,7 +5,7 @@ A dirty little python script to munge dictionary words into possible passwords.
 
 Example usage:
 
-./munge.py -l 9 -i dictionary.txt -o munged_dictionary.txt
+./munge.py -l 9 -i dictionary.txt -o munged.txt
 
 # Policy
 
