@@ -36,6 +36,9 @@ parser.add_argument('--special', '-s', action="store_true", dest="special",
 					default=False,
 					help="Include special characters.")
 
+parser.add_argument('-r','--rules', type=int, default=4,
+					help='minimum number of rules to match [default 4]')
+
 parser.add_argument('-m','--min', type=int, default=8,
 					help='minimum password length [default 8]')
 
@@ -96,6 +99,11 @@ if os.path.isfile(args.input):
 	with open(args.input) as f:
 		for line in f:
 			policy=True
+			rules=0
+			if args.rules:
+				minrules=args.rules
+			else:
+				minrules=99
 			password=line.rstrip()
 			if len(password)>0:
 				if args.min:
@@ -107,16 +115,24 @@ if os.path.isfile(args.input):
 				if args.lowercase:
 					if check_lowercase(password)==False:
 						policy=False
+					else:
+						rules+=1;
 				if args.uppercase:
 					if check_uppercase(password)==False:
 						policy=False
+					else:
+						rules+=1;
 				if args.numeric:
 					if check_numeric(password)==False:
 						policy=False
+					else:
+						rules+=1;
 				if args.special:
 					if check_special(password)==False:
 						policy=False
-			if policy==True:
+					else:
+						rules+=1;
+			if policy==True or rules>=minrules:
 				if args.output:
 					of.write(password + '\n')
 				else:
