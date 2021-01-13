@@ -109,9 +109,11 @@ if os.path.isfile(args.input):
 				if args.min:
 					if len(password)<args.min:
 						policy=False
+                                                rules=-100
 				if args.max:
 					if len(password)>args.max:
 						policy=False
+                                                rules=-100
 				if args.lowercase:
 					if check_lowercase(password)==False:
 						policy=False
@@ -132,6 +134,8 @@ if os.path.isfile(args.input):
 						policy=False
 					else:
 						rules+=1;
+                        else:
+                                policy=False;
 			if policy==True or rules>=minrules:
 				if args.output:
 					of.write(password + '\n')
