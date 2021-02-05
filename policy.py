@@ -134,15 +134,15 @@ if os.path.isfile(args.input):
 						policy=False
 					else:
 						rules+=1;
-						else:
-							policy=False;
+			else:
+				policy=False;
 			if policy==True or rules>=minrules:
 				if args.output:
 					of.write(password + '\n')
 				else:
-					print password
+					print(password)
 else:
-	print "Input file does not exist.";
+	print ("Input file does not exist.");
 
 if args.output:
 	of.close()
