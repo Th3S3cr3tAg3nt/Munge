@@ -1,7 +1,6 @@
-import argparse
+import argparse, os
 __author__ = 'th3s3cr3tag3nt'
 __modder__ = 'c0d3ma5t3r'
-
 parser = argparse.ArgumentParser(
 	formatter_class=argparse.RawDescriptionHelpFormatter,description='''\
  _ __ ___  _   _ _ __   __ _  ___   _ __  _   _
@@ -14,23 +13,6 @@ Dirty little word munger by Th3 S3cr3t Ag3nt.
 '''
 )
 
-#define arguments for script
-parser.add_argument('word',metavar='word',nargs='?',help='word to munge')
-parser.add_argument('-l','--level',type=int,default=5,help='munge level [1-3] (default 3)')
-parser.add_argument('-i','--input',dest='input',help='input file')
-parser.add_argument('-o','--output',dest='output',help='output file')
-
-#get arguments
-args = parser.parse_args()
-
-#clamp level 0-3
-if args.level > 3:
-	args.level = 3
-if args.level < 0:
-	args.level = 0
-
-#get word list
-wordlist = []
 def replace(w,chars):
 	global wordlist
 	for c in chars:
@@ -72,19 +54,44 @@ def munge(word, level):
 def write_file():
 	with open(args.output, 'w') as f:
 		for word in wordlist:
-			f.writelines(word)
+				f.writelines(f'{word}\n')
 
 def read_file():
 	with open(args.input, 'r') as f:
 		for word in f:
-			munge(word.rstrip(), args.level)
+			munge(word.strip(), args.level)
+
+def cleanup():
+	global wordlist
+	for c in wordlist:
+		if c == '':
+			wordlist.remove(c)
+
+
+#define arguments for script
+parser.add_argument('word',metavar='word',nargs='?',help='word to munge')
+parser.add_argument('-l','--level',type=int,default=5,help='munge level [1-3] (default 3)')
+parser.add_argument('-i','--input',dest='input',help='input file')
+parser.add_argument('-o','--output',dest='output',help='output file')
+
+#get arguments
+args = parser.parse_args()
+
+#clamp level 0-3
+if args.level > 3:
+	args.level = 3
+if args.level < 0:
+	args.level = 0
+
+#init empty word list
+wordlist = []
 
 if args.word:
 	word = args.word.lower()
 	munge(word, args.level)
-	
+
 elif args.input:
-	## Open the file with read only
+	#Open the file with read only
 	try:
 		read_file()
 	except IOError:
@@ -92,10 +99,12 @@ elif args.input:
 else:
 	print("Nothing to do...\nTry -h for help.")
 
-wordlist = set(wordlist)
+wordlist = sorted(set(wordlist))
+cleanup()
+print(wordlist)
 
 if args.output:
-	## Open the file with write only
+	#Open the file with write only
 	try:
 		write_file()
 		print(f"Written to: {args.output}")
