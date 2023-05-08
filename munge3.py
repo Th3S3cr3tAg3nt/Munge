@@ -32,9 +32,10 @@ if args.level < 0:
 #get word list
 wordlist = []
 def replace(w,chars):
+	global wordlist
 	for c in chars:
 		if c in w:
-			w.replace(c,chars[c])
+			wordlist.append(w.replace(c,chars[c]))
 
 def basic(w):
 	global wordlist
@@ -46,13 +47,13 @@ def basic(w):
 def advanced(w):
 	global wordlist
 	alts = {'e':'3','a':'4','i':'!','o':'0','s':'$'}
-	wordlist.append(basic(w))
+	basic(w)
 	replace(w,alts)
 
 def expert(w):
 	global wordlist
 	alts = {'a':'@','i':'1','l':'1'}
-	wordlist.append(advanced(w))
+	advanced(w)
 	replace(w,alts)
 
 def munge(word, level):
