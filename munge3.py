@@ -1,4 +1,4 @@
-import argparse
+import argparse, os
 __author__ = 'th3s3cr3tag3nt'
 __modder__ = 'c0d3ma5t3r'
 parser = argparse.ArgumentParser(
@@ -103,10 +103,12 @@ if args.level < 0:
 wordlist = []
 
 if args.word:
+	name = args.word
 	word = args.word.lower()
 	munge(word, args.level)
 
 elif args.input:
+	name = os.path.basename(args.input)
 	#Open the file with read only
 	try:
 		read_file()
@@ -126,6 +128,8 @@ if args.output:
 	except IOError:
 		print(f"Exiting\nCould not write file: {args.input}")
 else:
+	count = len(wordlist)
 	for word in wordlist:
 		print(word)
+	print(f"Generated {count} words from {name}")
 
