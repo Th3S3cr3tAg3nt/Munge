@@ -31,9 +31,9 @@ args = parser.parse_args()
 
 # Limit the level
 if args.level > 9:
-	args.level = 9;
+	args.level = 9
 if args.level < 0:
-	args.level = 0;
+	args.level = 0
 
 # create word list
 wordlist = list()
