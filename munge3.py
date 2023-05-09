@@ -1,4 +1,4 @@
-import argparse, os
+import argparse
 __author__ = 'th3s3cr3tag3nt'
 __modder__ = 'c0d3ma5t3r'
 parser = argparse.ArgumentParser(
@@ -13,11 +13,13 @@ Dirty little word munger by Th3 S3cr3t Ag3nt.
 '''
 )
 
-def replace(w,chars):
+def replace(w,chars,nums):
 	global wordlist
 	for c in chars:
 		if c in w:
-			wordlist.append(w.replace(c,chars[c]))
+			output = w.replace(c,chars[c])
+			wordlist.append(output)
+			append(output,nums)
 
 def append(w,chars):
 	global wordlist
@@ -38,20 +40,19 @@ def advanced(w):
 	'?','_','0','01','69','21','22','23','1234',
 	'8','9','10','11','13','3','4','5','6','7')
 	basic(w)
-	replace(w,alts)
-	append(w,nums)
+	replace(w,alts,nums)
 
 def expert(w):
 	global wordlist
-	alts = {'a':'@','i':'1','l':'1'}
+	alts = {'a':'@','i':'1','l':'1','s':'5'}
 	nums = ('07','08','09','14','15','16','17','18','19','24','77',
 	'88','99','12345','123456789','00','02','03','04','05','06',
 	'19','20','25','26','27','28','007','1234567','12345678','111111',
 	'111','777','666','101','33','44','55','66','2008','2009','2010',
 	'2011','86','87','89','90','91','92','93','94','95','98')
 	advanced(w)
-	replace(w,alts)
-	append(w,nums)
+	replace(w, alts,nums)
+	
 
 def munge(word, level):
 	global wordlist
@@ -69,7 +70,7 @@ def munge(word, level):
 def write_file():
 	with open(args.output, 'w') as f:
 		for word in wordlist:
-				f.writelines(f'{word}\n')
+			f.writelines(f'{word}\n')
 
 def read_file():
 	with open(args.input, 'r') as f:
