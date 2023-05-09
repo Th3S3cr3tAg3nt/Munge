@@ -19,6 +19,11 @@ def replace(w,chars):
 		if c in w:
 			wordlist.append(w.replace(c,chars[c]))
 
+def append(w,chars):
+	global wordlist
+	for c in chars:
+		wordlist.append(f'{w}{c}')
+
 def basic(w):
 	global wordlist
 	wordlist.append(w)
@@ -29,14 +34,24 @@ def basic(w):
 def advanced(w):
 	global wordlist
 	alts = {'e':'3','a':'4','i':'!','o':'0','s':'$'}
+	nums = ('1','123456','12','2','123','!','.',
+	'?','_','0','01','69','21','22','23','1234',
+	'8','9','10','11','13','3','4','5','6','7')
 	basic(w)
 	replace(w,alts)
+	append(w,nums)
 
 def expert(w):
 	global wordlist
 	alts = {'a':'@','i':'1','l':'1'}
+	nums = ('07','08','09','14','15','16','17','18','19','24','77',
+	'88','99','12345','123456789','00','02','03','04','05','06',
+	'19','20','25','26','27','28','007','1234567','12345678','111111',
+	'111','777','666','101','33','44','55','66','2008','2009','2010',
+	'2011','86','87','89','90','91','92','93','94','95','98')
 	advanced(w)
 	replace(w,alts)
+	append(w,nums)
 
 def munge(word, level):
 	global wordlist
@@ -101,7 +116,6 @@ else:
 
 wordlist = sorted(set(wordlist))
 cleanup()
-print(wordlist)
 
 if args.output:
 	#Open the file with write only
