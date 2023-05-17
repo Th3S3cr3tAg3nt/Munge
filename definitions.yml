@@ -1,0 +1,47 @@
+# definitions.yml file for munge3.py
+basic:
+  enabled: true
+
+prepend:
+  enabled: true
+  munge: [
+    '-',
+    'prod_'
+  ]
+
+numbers:
+  enabled: true
+  start: 2014
+  end: 3050
+
+punctuation:
+  enabled: true
+  count: 1
+
+append:
+  enabled: true
+  munge: [
+    '123456',
+    '_dev'
+  ]
+
+transform: 
+  enabled: true
+  munge: [
+    ['a', '@'],
+    ['a', '4'],
+    ['A', '@'],
+    ['A', '4'],
+    ['e', '3'],
+    ['E', '3'],
+    ['i', '!'],
+    ['i', '1'],
+    ['I', '!'],
+    ['I', '1'],
+    ['l', '1'],
+    ['L', '1'],
+    ['s', '$'],
+    ['s', '5'],
+    ['S', '$'],
+    ['S', '5']
+  ]
