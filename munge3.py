@@ -8,7 +8,7 @@ from re import sub
 from pyfiglet import Figlet
 
 __progname__='munge3.py'
-__version__='0.0.1'
+__version__='1.0'
 __author__='Zizzix (zizzixsec@gmail.com)'
 __description__='a dirty little word munger for python3'
 

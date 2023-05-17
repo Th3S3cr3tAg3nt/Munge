@@ -1,10 +1,12 @@
+# definitions.yml file for munge3.py
 basic:
   enabled: true
 
 prepend:
   enabled: true
   munge: [
-    '-'
+    '-',
+    'prod_'
   ]
 
 numbers:
@@ -19,7 +21,8 @@ punctuation:
 append:
   enabled: true
   munge: [
-    '123456'
+    '123456',
+    '_dev'
   ]
 
 transform: 
