@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import argparse
 __author__ = 'th3s3cr3tag3nt'
 
@@ -236,9 +236,9 @@ elif args.input:
 				mungeword(wrd.rstrip(), args.level)
 			f.close()
 	except IOError:
-		print "Exiting\nCould not read file:", args.input
+		print ("Exiting\nCould not read file:", args.input)
 else:
-	print "Nothing to do!!\nTry -h for help.\n";
+	print ("Nothing to do!!\nTry -h for help.\n")
 
 wordlist = set(wordlist)
 
@@ -251,9 +251,9 @@ if args.output:
 				#print(word)
 				f.write(word + "\n")
 			f.close()
-			print "Written to:", args.output
+			print ("Written to:", args.output)
 	except IOError:
-		print "Exiting\nCould not write file:", args.input
+		print ("Exiting\nCould not write file:", args.input)
 else:
 	for word in wordlist:
 		print(word)
