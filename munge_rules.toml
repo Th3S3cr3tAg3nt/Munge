@@ -1,0 +1,133 @@
+# Munge rules config (TOML)
+# Edit this file to change leet sets, suffix sets, levels, and policy/excludes.
+#
+# Schema:
+#   [policy]  # optional defaults applied globally unless overridden via CLI
+#   min_len = 8
+#   max_len = 64
+#   require_upper = true
+#   require_lower = true
+#   require_digit = true
+#   require_special = false
+#   # If set, "special" means membership in this charset; else special means "not alnum"
+#   # special_charset = "!@#$%^&*_-."
+#
+#   [exclude]  # optional stopwords/excludes before munge/policy mode runs
+#   case_sensitive = false
+#   words = ["the","and","if"]
+#   # files = ["stopwords.txt"]
+#
+#   [leet_sets.<name>]
+#   map = { "a" = "@", "e" = "3", ... }
+#
+#   [suffix_sets.<name>]
+#   values = ["1", "!", "123", ...]
+#
+#   [levels.<0-9>]
+#   leet_sets   = ["set1", "set2"]    # optional
+#   suffix_sets = ["common", "years"] # optional
+#   include_base = true               # optional (default true)
+
+[policy]
+min_len = 8
+max_len = 128
+require_upper = false
+require_lower = false
+require_digit = false
+require_special = false
+# special_charset = "!@#$%^&*_-."
+
+[exclude]
+case_sensitive = false
+# Top 100 most common words in written English (Oxford English Corpus list).
+# Source: Wikipedia “Most common words in English” (OEC top 100).
+words = [
+  "the","be","to","of","and","a","in","that","have","i","it","for","not","on","with","he","as","you","do","at",
+  "this","but","his","by","from","they","we","say","her","she","or","an","will","my","one","all","would","there",
+  "their","what","so","up","out","if","about","who","get","which","go","me","when","make","can","like","time","no",
+  "just","him","know","take","people","into","year","your","good","some","could","them","see","other","than","then",
+  "now","look","only","come","its","over","think","also","back","after","use","two","how","our","work","first","well",
+  "way","even","new","want","because","any","these","give","day","most","us"
+]
+# files = ["stopwords.txt"]
+
+[leet_sets.set1]
+map = { e = "3", a = "4", o = "0", i = "1", l = "1", s = "$" }
+
+[leet_sets.set2]
+map = { e = "3", a = "@", o = "0", i = "1", l = "1", s = "$" }
+
+[leet_sets.set3]
+map = { e = "3", a = "4", o = "0", i = "!", l = "1", s = "$" }
+
+[leet_sets.set4]
+map = { e = "3", a = "@", o = "0", i = "!", l = "1", s = "$" }
+
+[leet_sets.set5]
+map = { e = "3", a = "4", o = "0", i = "1", l = "1", s = "5" }
+
+[leet_sets.set6]
+map = { e = "3", a = "@", o = "0", i = "1", l = "1", s = "5" }
+
+[leet_sets.set7]
+map = { e = "3", a = "4", o = "0", i = "!", l = "1", s = "5" }
+
+[leet_sets.set8]
+map = { e = "3", a = "@", o = "0", i = "!", l = "1", s = "5" }
+
+[suffix_sets.common]
+values = ["1", "123456", "12", "2", "123", "!", "."]
+
+[suffix_sets.more_numbers]
+values = ["?", "_", "0", "01", "69", "23", "24", "25", "1234", "8", "9", "10",
+          "11", "13", "3", "4", "5", "6", "7"]
+
+[suffix_sets.even_more]
+values = ["07", "08", "09", "14", "15", "16", "17", "18", "19", "21", "22", "20",
+          "77", "88", "99", "12345", "123456789"]
+
+[suffix_sets.years_and_misc]
+values = ["00", "02", "03", "04", "05", "06", "007", "101", "111", "111111", "666", "777",
+          "2020", "2021", "2022", "2023", "2024", "2025",
+          "86", "87", "89", "90", "91", "92", "93", "94", "95", "98",
+          "1234567", "12345678"]
+
+[levels.0]
+include_base = true
+
+[levels.1]
+include_base = true
+
+[levels.2]
+include_base = true
+
+[levels.3]
+include_base = true
+
+[levels.4]
+include_base = true
+
+[levels.5]
+include_base = true
+leet_sets = ["set1"]
+suffix_sets = ["common"]
+
+[levels.6]
+include_base = true
+leet_sets = ["set1", "set2"]
+suffix_sets = ["common"]
+
+[levels.7]
+include_base = true
+leet_sets = ["set1", "set2", "set3"]
+suffix_sets = ["common", "more_numbers"]
+
+[levels.8]
+include_base = true
+leet_sets = ["set1", "set2", "set3", "set4"]
+suffix_sets = ["common", "more_numbers", "even_more"]
+
+[levels.9]
+include_base = true
+leet_sets = ["set1", "set2", "set3", "set4", "set5", "set6", "set7", "set8"]
+suffix_sets = ["common", "more_numbers", "even_more", "years_and_misc"]
